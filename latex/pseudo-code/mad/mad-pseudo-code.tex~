@@ -1,0 +1,28 @@
+
+
+\begin{algorithm}[h]
+\begin{algorithmic}[1]
+\Function{mad}{$T$}
+\If{$\# T = 1$}
+\State \Return $0$
+\EndIf
+\Function{bisect}{$T,(a,b),(c,d)$}
+\State $\widetilde{T} \leftarrow \frac{1}{2}(T_{\left \lceil{\# T /2 }\right \rceil - 1} + T_{\left \lfloor{\# T /2 }\right \rfloor})$
+\If{$b - a < 2$}
+\If{$\# T \% 2 = 0$}
+\State \Return $\frac{1}{2} ( \max(\widetilde{T} - T_{b},T_{c} - \widetilde{T} ) + \min(\widetilde{T} - T_{a},T_{b} - \widetilde{T}) )$
+\Else
+\State \Return $\min(\max(\widetilde{T} - T_{b},T_{c} - \widetilde{T} ),\min(T_{a} - \widetilde{T},T_{b} - \widetilde{T}))$
+\EndIf
+\EndIf
+\If{$4 \widetilde{T} > T_{a} + T_{b} + T_{c} + T_{d}$}
+\State \Return $\Call{bisect}{T,(a+\left \lfloor \frac{b-a}{2}\right \rfloor,b),(c+\left \lfloor \frac{d-c}{2}\right \rfloor,d)}$
+\Else
+\State \Return $\Call{bisect}{T,(a,a+\left \lceil \frac{b-a}{2}\right \rceil),(c,c+\left \lceil \frac{d-c}{2}\right \rceil)}$
+\EndIf
+\EndFunction
+\State \Return $\Call{bisect}{T,(0,\left \lfloor{\# T /2 }\right \rfloor - 1),(\left \lceil{\# T /2 }\right \rceil,\#T - 1)}$
+\EndFunction
+\end{algorithmic}
+\caption{\label{alg:mad-sorted} Median Absolute Deviation of a Sorted Container $T$ via Bisection}
+\end{algorithm}
