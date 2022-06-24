@@ -28,7 +28,7 @@ class mad :
     Attributes
     ----------
     value : float
-        If the seq_mad object has data elements then mad is the
+        If the mad object has data elements then mad is the
         value of the median absolute deviation, otherwise its 
         value is equal to None
     
