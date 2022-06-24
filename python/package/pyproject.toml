@@ -25,7 +25,9 @@ dependencies = [
 
 
 [options]
-package_dir=src
+package_dir=
+    =src
 
 [options.packages.find]
 where=src
+
