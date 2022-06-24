@@ -1,1 +1,1 @@
-from .mad.src import mad
+from .seqstats import mad
