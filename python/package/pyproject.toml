@@ -23,7 +23,3 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/grosed/seqstats"
 
-
-[options.packages.find]
-where=src
-
