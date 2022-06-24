@@ -1,1 +1,1 @@
-from . import mad
+from .mad import mad
