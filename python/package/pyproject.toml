@@ -24,3 +24,8 @@ dependencies = [
 "Homepage" = "https://github.com/grosed/seqstats"
 
 
+[options]
+package_dir=src
+
+[options.packages.find]
+where=src
