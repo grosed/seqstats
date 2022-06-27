@@ -1,4 +1,5 @@
-# <u> seqstats Algorithms for Sequential Calculation of Common Statistics </u>
+# <u> seqstats </u> 
+Algorithms for Sequential Calculation of Common Statistics </u>
 
 ## Installing seqstats python package
 
