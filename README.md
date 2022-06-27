@@ -6,4 +6,4 @@
 
 #### installing from github with pip
 
-python -m pip install -e 'git+https://github.com/&#8203;grosed/seqstats/#egg=seqstats&subdirectory=python/package'
+python -m pip install -e 'git+https<area>://github.com/grosed/seqstats/#egg=seqstats&subdirectory=python/package'
