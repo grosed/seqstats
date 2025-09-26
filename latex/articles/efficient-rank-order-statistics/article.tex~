@@ -1,0 +1,59 @@
+
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{fullpage}
+\usepackage{times}
+
+\title{Computing the Median Absolute Deviation of a Sorted Vector in Logarithmic Time}
+\author{[Daniel Grose] \\ [Lancaster University] \\ \texttt{dan.grose@lancaster.ac.uk} 
+\date{\today}
+
+\begin{document}
+% \maketitle
+
+\begin{abstract}
+The median absolute deviation (MAD) is a widely used measure of statistical dispersion, known for its robustness against outliers. Computing the MAD of an arbitrary vector of size $n$ requires $O(n)$ time in the best case, either by explicitly sorting the deviations or by applying a linear-time selection algorithm. In this note, we show that if the input vector is already sorted, the MAD can be computed in $O(\log n)$ time. The key observation is that the deviations from the median form two monotone subsequences, reducing the problem to finding the median of two sorted arrays, which is solvable in logarithmic time. This result has implications for both theoretical computer science and practical applications in robust statistics.
+\end{abstract}
+
+\section{Introduction}
+The median absolute deviation (MAD) is defined as
+\[
+\mathrm{MAD}(x) = \mathrm{median}(|x_i - m|), \quad m = \mathrm{median}(x),
+\]
+where $x = (x_1, \dots, x_n)$ is a vector of real numbers. The MAD is widely used in statistics, machine learning, and data science as a robust measure of variability.
+
+For an unsorted vector, computing the MAD requires $O(n)$ time: one must compute all deviations and find their median using either sorting ($O(n \log n)$) or a linear-time selection algorithm. The assumption of sorted input has not, to our knowledge, been fully exploited in prior work.
+
+\section{Preliminaries}
+Let $x = (x_1, \dots, x_n)$ be a sorted vector, i.e., $x_1 \leq x_2 \leq \cdots \leq x_n$. Denote the median of $x$ by $m$. Define the deviations as $d_i = |x_i - m|$ for $1 \leq i \leq n$.
+
+We recall the well-studied problem of finding the median of two sorted arrays, which can be solved in $O(\log n)$ time using binary search partitioning.
+
+\section{Key Observation}
+Since $x$ is sorted, the deviations split into two monotone subsequences:
+\begin{itemize}
+    \item For $i < \text{median index}$, $d_i = m - x_i$, which decreases as $i$ decreases. Reversing the order yields an increasing sequence.
+    \item For $i > \text{median index}$, $d_i = x_i - m$, which increases as $i$ increases.
+\end{itemize}
+Thus, the set of deviations is the union of two sorted sequences (plus a single $0$ if $n$ is odd).
+
+\section{Algorithm}
+\begin{enumerate}
+    \item Find the median $m$ of $x$ in $O(1)$ time.
+    \item Construct logical views of the left deviations $L = [m - x_{k}, m - x_{k-1}, \dots, m - x_1]$ (which is sorted ascending) and the right deviations $R = [x_{k+1} - m, x_{k+2} - m, \dots, x_n - m]$.
+    \item Use the median-of-two-sorted-arrays algorithm to compute the median of $L \cup R$ (plus $0$ if $n$ is odd).
+\end{enumerate}
+
+\section{Complexity Analysis}
+Finding the median of $x$ is $O(1)$. Constructing $L$ and $R$ requires no materialization; indices can be handled implicitly. The median of two sorted arrays can be found in $O(\log n)$. Therefore, the total complexity is $O(\log n)$.
+
+\section{Discussion}
+This result improves upon the known $O(n)$ bound for MAD computation when the input is sorted. The savings are particularly relevant in scenarios where MAD must be computed repeatedly on pre-sorted data, such as streaming data pipelines, order statistics maintenance, and robust statistical preprocessing.
+
+Future work includes exploring whether similar monotonicity arguments can be applied to accelerate computation of other robust statistics (e.g., interquartile range, trimmed means).
+
+\section{Conclusion}
+We have shown that the median absolute deviation of a sorted vector can be computed in logarithmic time by reducing the problem to finding the median of two sorted arrays. This observation bridges a gap between robust statistics and efficient selection algorithms.
+
+\end{document}
+

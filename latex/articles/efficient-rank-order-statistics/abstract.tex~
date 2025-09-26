@@ -1,0 +1,13 @@
+
+
+\begin{abstract}
+
+  The computation of both order and rank statistics is often necessary when using non-parametric methods in data analysis. However, it is not uncommon for the computational
+  complexity associated with their calculation to be overlooked, both in terms of algorithm design, and data structure choice. Interestingly, this seems to be more
+  often the case when there is a requirment that the data is frequently updated, as is the case, for example, when working data streams.
+
+  This note considers the cases of computing the Median Absolute Deviation, (an order statistic), and the Mann-Whitney U, (a rank statistic).
+  Importantly, by using an appropriate data structure, it is shown that, for a data store of size $n$, the computational cost of an update is $\mathcal{O}(\log^{2}n)$ for the
+  Median Absolute Deviation, and $\mathcal{O}(\log n)$ for the Mann-Whitney U statistic .   
+
+\end{abstract}
