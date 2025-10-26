@@ -1,0 +1,117 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Computational Complexity of Mean and Median Absolute Deviations}
+\author{ChatGPT}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{1. Mean Absolute Deviation Between Two Ordered Sets}
+
+Given two ordered sets \( A = (a_1, a_2, \dots, a_n) \) and \( B = (b_1, b_2, \dots, b_n) \), the mean absolute deviation (MAD) between them is defined as:
+\begin{equation}
+\text{MAD}(A, B) = \frac{1}{n} \sum_{i=1}^n |a_i - b_i|
+\end{equation}
+
+\textbf{Steps:}
+\begin{enumerate}
+    \item Compute \( |a_i - b_i| \) for each \( i \) (O(1) per element).
+    \item Sum the absolute differences.
+    \item Divide by \( n \).
+\end{enumerate}
+
+\textbf{Complexity:}
+\begin{itemize}
+    \item Time: \( O(n) \)
+    \item Space: \( O(1) \)
+\end{itemize}
+
+\section*{2. Median Absolute Deviation Between Two Ordered Sets}
+
+Given the same sets, the median absolute deviation is defined as:
+\begin{equation}
+\text{MAD}(A,B) = \text{median}(|a_1 - b_1|, |a_2 - b_2|, \dots, |a_n - b_n|)
+\end{equation}
+
+\textbf{Steps:}
+\begin{enumerate}
+    \item Compute all \( |a_i - b_i| \) values in \( O(n) \).
+    \item Find their median:
+    \begin{itemize}
+        \item Sorting-based: \( O(n \log n) \)
+        \item Median-of-medians (selection): \( O(n) \)
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Complexity:}
+\begin{itemize}
+    \item Time: \( O(n) \) with optimal selection, \( O(n \log n) \) with sorting
+    \item Space: \( O(1) \)
+\end{itemize}
+
+\section*{3. Mean Absolute Deviation of an Ordered Set}
+
+For an ordered set \( X = (x_1, x_2, \dots, x_n) \), the mean absolute deviation is:
+\begin{equation}
+\text{MAD}(X) = \frac{1}{n} \sum_{i=1}^n |x_i - \bar{x}|, \quad \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i
+\end{equation}
+
+\textbf{Steps:}
+\begin{enumerate}
+    \item Compute the mean \( \bar{x} \) in \( O(n) \).
+    \item Compute \( |x_i - \bar{x}| \) for each \( i \) and sum them in \( O(n) \).
+    \item Divide by \( n \).
+\end{enumerate}
+
+\textbf{Complexity:}
+\begin{itemize}
+    \item Time: \( O(n) \)
+    \item Space: \( O(1) \)
+\end{itemize}
+
+\section*{4. Median Absolute Deviation of an Ordered Set}
+
+For a sorted (ordered) set \( X = (x_1, x_2, \dots, x_n) \), the median absolute deviation is:
+\begin{equation}
+\text{MAD}(X) = \text{median}(|x_i - m|), \quad m = \text{median}(X)
+\end{equation}
+
+\textbf{Steps:}
+\begin{enumerate}
+    \item Find the median \( m \) in \( O(1) \) (since \( X \) is sorted).
+    \item Compute deviations \( |x_i - m| \) in \( O(n) \).
+    \item Find the median of the deviations:
+    \begin{itemize}
+        \item Using a linear-time selection algorithm: \( O(n) \)
+        \item Using sorting: \( O(n \log n) \)
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Complexity:}
+\begin{itemize}
+    \item Time: \( O(n) \)
+    \item Space: \( O(1) \)
+\end{itemize}
+
+\section*{Summary Table}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Problem} & \textbf{Time Complexity} & \textbf{Space Complexity} \\
+\hline
+Mean absolute deviation of two ordered sets & \(O(n)\) & \(O(1)\) \\
+Median absolute deviation of two ordered sets & \(O(n)\) or \(O(n \log n)\) & \(O(1)\) \\
+Mean absolute deviation of an ordered set & \(O(n)\) & \(O(1)\) \\
+Median absolute deviation of an ordered set & \(O(n)\) & \(O(1)\) \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
